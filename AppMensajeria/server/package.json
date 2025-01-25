@@ -2,13 +2,27 @@
   "name": "server",
   "version": "1.0.0",
   "main": "app.ts",
-  "scripts": {},
+  "scripts": {
+    "dev": "nodemon app.ts",
+    "test": "playwright test",
+    "migrate": "cd ./src/database && npx sequelize-cli db:migrate",
+    "create:migration": "cd ./src/database && npx sequelize-cli migration:generate --name",
+    "create:seed": "cd ./src/database && npx sequelize-cli seed:generate --name",
+    "migrate:undo": "cd ./src/database && npx sequelize-cli db:migrate:undo",
+    "seed:undo": "cd ./src/database && npx sequelize-cli db:seed:undo",
+    "seed:all": "cd ./src/database && npx sequelize-cli db:seed:all"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.50.0",
-    "@types/node": "^22.10.10"
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.10.10",
+    "@types/passport": "^1.0.17",
+    "@types/passport-jwt": "^4.0.1"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -22,6 +36,7 @@
     "sequelize": "^6.37.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "twilio": "^5.4.2",
     "typescript": "^5.7.3"
   }
 }
