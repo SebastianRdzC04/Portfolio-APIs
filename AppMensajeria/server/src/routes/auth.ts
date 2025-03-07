@@ -12,6 +12,6 @@ const router = express.Router();
 
 router.post('/login', loginController);
 
-router.post('/register',passport.authenticate('jwt', {session: false}),roleMiddleware('1'), registerController);
+router.post('/register', registerController);
 
 export default router;

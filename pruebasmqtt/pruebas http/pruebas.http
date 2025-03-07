@@ -3,3 +3,8 @@ GET https://examples.http-client.intellij.net/get
     ?generated-in=WebStorm
 
 ###
+
+
+### get
+
+GET localhost:777/pene
