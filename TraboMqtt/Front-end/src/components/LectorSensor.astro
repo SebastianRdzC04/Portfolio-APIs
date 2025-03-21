@@ -1,3 +1,85 @@
 ---
 
 ---
+
+<div class="flex flex-col items-center justify-between min-h-[300px]">
+    <div class="h-[50px] w-full flex items-center justify-center">
+        <h1 id="sensorData" class="text-center transition-opacity duration-300">
+            Esperando datos...
+        </h1>
+    </div>
+
+    <button
+            id="showButton"
+            class="mt-40 py-2.5 px-6 text-sm rounded-full bg-gray-700 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-gray-900"
+    >
+        Ocultar Datos
+    </button>
+</div>
+
+
+<script>
+    import mqtt from 'mqtt';
+
+    let isVisible = true;
+
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const client = mqtt.connect('ws://3.139.69.116:8083/mqtt', {
+            username: 'sebas',
+            password: 'sebas12345',
+            protocolVersion: 5,  // MQTT
+        });
+
+        function toggleVisibility() {
+            isVisible = !isVisible;
+
+            if (sensorDataElement) {
+                // Usar opacity en lugar de hidden para mantener el espacio
+                sensorDataElement.style.opacity = isVisible ? '1' : '0';
+            }
+
+            if (showButton) {
+                // Actualizar el texto del botón
+                showButton.textContent = isVisible ? 'Ocultar Datos' : 'Ver Datos';
+            }
+        }
+
+        const sensorDataElement = document.getElementById('sensorData')
+        
+        const showButton = document.getElementById('showButton')
+
+        if (showButton) {
+            showButton.addEventListener('click', toggleVisibility);
+        }
+
+
+        client.on('connect', () => {
+            console.log('Conectado al servidor MQTT sobre WebSocket');
+            client.subscribe('prueba', (err) => {
+                if (!err) {
+                    console.log("Suscrito al topic 'prueba'");
+                }
+            });
+        });
+
+        client.on('message', (topic, message) => {
+
+            console.log(topic)
+            console.log(message)
+
+            if (topic === 'prueba') {
+                // Update the DOM directly
+                if (sensorDataElement) {
+                    sensorDataElement.textContent = message.toString();
+                }
+            }
+        });
+
+        client.on('error', (err) => {
+            console.error("Error de conexión:", err);
+        });
+    });
+</script>

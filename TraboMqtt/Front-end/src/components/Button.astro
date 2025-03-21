@@ -1,3 +1,19 @@
 ---
 
+interface ButtonProps {
+    bid: string;
+}
+
+const props = Astro.props;
+
+const {bid} = props;
+
 ---
+
+
+<button
+        id={bid}
+        class="mt-40 py-2.5 px-6 text-sm rounded-full bg-gray-700 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-gray-900"
+>
+    <slot/>
+</button>

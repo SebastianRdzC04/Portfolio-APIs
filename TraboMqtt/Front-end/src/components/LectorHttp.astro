@@ -1,3 +1,41 @@
 ---
 
+
 ---
+
+<div class="flex flex-col items-center justify-between min-h-[300px]">
+    <div class="h-[50px] w-full flex items-center justify-center">
+        <h1 id="sensorData2" class="text-center transition-opacity duration-300">
+            Esperando consulta
+        </h1>
+    </div>
+
+    <button
+            id="showButton2"
+            class="mt-40 py-2.5 px-6 text-sm rounded-full bg-gray-700 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-gray-900"
+    >
+        Consultar datos
+    </button>
+</div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+
+        const button = document.getElementById('showButton2');
+        if (button) {
+            button.addEventListener('click', async () => {
+                console.log('hola');
+                fetch('http://localhost:777/topic/pruebahttp').then(res => res.json()).then(data => {
+                    console.log(data);
+                    const text = document.getElementById('sensorData2');
+                    if (text) {
+                        text.innerText = data.data.toString();
+                    }
+
+                })
+            });
+        }
+    });
+</script>

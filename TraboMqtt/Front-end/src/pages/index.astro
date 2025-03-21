@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LectorSensor from "../components/LectorSensor.astro";
+import LectorHttp from "../components/LectorHttp.astro";
+---
+
+<Layout>
+	<main>
+		<section class="grid-cols-2 grid">
+			<div>
+				<LectorSensor/>
+			</div>
+			<div>
+				<LectorHttp/>
+			</div>
+
+		</section>
+		<section>
+			<h2 class="text-2xl font-bold text-center">¿Qué es Astro?</h2>
+			<p class="text-center">Astro es un nuevo marco de trabajo para la creación de sitios web modernos y rápidos.</p>
+		</section>
+	</main>
+</Layout>

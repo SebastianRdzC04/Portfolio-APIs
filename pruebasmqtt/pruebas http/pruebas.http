@@ -7,4 +7,4 @@ GET https://examples.http-client.intellij.net/get
 
 ### get
 
-GET localhost:777/pene
+GET localhost:777/topic/pruebahttp
